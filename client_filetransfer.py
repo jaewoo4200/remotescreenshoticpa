@@ -42,7 +42,7 @@ def getfilefromserver(filename):
             print('파일 / File [%s]: 파일이 존재하지 않거나 오류가 발생하였습니다. / File doesnt exist or there was an error.' % filename)
             return
 
-        with open('C:\\Users\\home\\Downloads\\' + filename, 'wb') as f: #이 부분은 클라이언트 컴퓨터에 맞게 수정해야됩니다.
+        with open('C:\\Users\\home\\Downloads\\' + filename, 'wb') as f: #이 부분은  컴퓨터에 맞게 수정해야됩니다.
             try:
                 while data:
                     f.write(data)
