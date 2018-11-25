@@ -27,7 +27,7 @@ import socket
 
 host_input = input('파일 전송 서버의 아이피를 입력하세요(ex. 192.168.0.7) : ')
 host = str(host_input)
-PORT = 9990
+port = 9990
 
 
 def getfilefromserver(filename):
