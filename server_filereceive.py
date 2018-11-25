@@ -31,7 +31,7 @@ host = str(host_input)
 port = 9990
 
 
-class mytcphandler(socketserver.baserequesthandler):
+class mytcphandler(socketserver.BaseRequestHandler):
     def handle(self):
         data_transferred = 0
         print('[%s] 연결되었습니다. / [%s] has been conncected.' % self.client_address[0])
