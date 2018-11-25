@@ -13,6 +13,13 @@
 # Remote access allows this program to identify problems on the other person's computer or to prevent illegal behavior.
 # This program is a client program.
 
+# 참고 출처 / Reference: http://yujuwon.tistory.com/entry/파이썬-외부-실행-결과-저장하기
+# 참고 출처 / Reference : https://realpython.com/python-sockets/
+# 참고 출처 / Reference : https://docs.python.org/3.7/library/socket.html
+# 참고 출처 / Reference : https://soooprmx.com/archives/8737
+# 참고 출처 / Reference : http://slays.tistory.com/45
+# 참고 출처 / Reference : https://docs.python.org/3.4/library/socketserver.html
+
 import os
 import socket
 import subprocess
@@ -20,7 +27,7 @@ import subprocess
 print('클라이언트 프로그램 구동 시작')
 host_input = input('접속 서버의 아이피를 입력하세요(ex. 192.168.0.7) : ')
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#host = '192.168.0.5'
+# host = '192.168.0.7'
 host = str(host_input)
 port = 9999
 s.connect((host, port))
@@ -36,7 +43,6 @@ while True:
         output_str = str(output_bytes, "euc-kr")
         s.send(str.encode(output_str + str(os.getcwd()) + '> '))
         print(output_str)
-
 
 
 # 연결 종료(Closing connection)
