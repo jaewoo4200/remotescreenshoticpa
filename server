@@ -16,10 +16,12 @@
 # Remote access allows this program to identify problems on the other person's computer or to prevent illegal behavior.
 # This program is a server program.
 
-# 참고 출처 : http://yujuwon.tistory.com/entry/파이썬-외부-실행-결과-저장하기
-# 참고 출처 : https://realpython.com/python-sockets/
-# 참고 출처 : https://docs.python.org/3.7/library/socket.html
-# 참고 출처 : https://soooprmx.com/archives/8737
+# 참고 출처 / Reference: http://yujuwon.tistory.com/entry/파이썬-외부-실행-결과-저장하기
+# 참고 출처 / Reference : https://realpython.com/python-sockets/
+# 참고 출처 / Reference : https://docs.python.org/3.7/library/socket.html
+# 참고 출처 / Reference : https://soooprmx.com/archives/8737
+# 참고 출처 / Reference : http://slays.tistory.com/45
+# 참고 출처 / Reference : https://docs.python.org/3.4/library/socketserver.html
 
 import socket
 import sys
@@ -32,7 +34,7 @@ def create_socket():
         global port
         global s
         host = str(host_input)
-        # host = '192.168.0.5'
+        # host = '192.168.0.7'
         port = 9999
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -85,6 +87,7 @@ def main():
     create_socket()
     bind_socket()
     accept_socket()
+
 
 print('서버 프로그램 구동 시작')
 host_input = input('접속 서버의 아이피를 입력하세요(ex. 192.168.0.7) : ')
