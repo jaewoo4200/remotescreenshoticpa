@@ -51,7 +51,7 @@ class mytcphandler(socketserver.BaseRequestHandler):
             except Exception as e:
                 print(e)
 
-        print('[%s]전송완료 되었습니다. / [%s] had been successfully received., 전송량은 [%d]입니다. / Transmission volume was [%d].' % (filename, data_transferred))
+        print('[%s]전송완료 되었습니다., 전송량은 [%d]입니다.' % (filename, data_transferred))
 
 
 def runServer():
